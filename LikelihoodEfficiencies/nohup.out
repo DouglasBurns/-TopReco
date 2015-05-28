@@ -1,0 +1,7 @@
+Warning in <TInterpreter::ReadRootmapFile>: class  edm::Wrapper<vector<vector<int> > > found in libDataFormatsWrappedStdDictionaries.so  is already in libBristolAnalysisNTupleTools.so 
+[?1034hNumber of Event Total :  8355526
+Number of Event Passing Selection :  225489
+Number of Event Have Requisite Partons :  119226
+Number of Event that Match Best Solution :  59502
+Efficiency wrt Event Selection :  0.263879834493
+Efficiency wrt parton presence :  0.499068995018

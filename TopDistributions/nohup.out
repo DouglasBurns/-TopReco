@@ -1,0 +1,14 @@
+Warning in <TInterpreter::ReadRootmapFile>: class  edm::Wrapper<vector<vector<int> > > found in libDataFormatsWrappedStdDictionaries.so  is already in libBristolAnalysisNTupleTools.so 
+Info in <TCanvas::Print>: file plots/HadronicTopPt.png has been created
+Info in <TCanvas::Print>: file plots/HadronicTopEta.png has been created
+Info in <TCanvas::Print>: file plots/HadronicTopEnergy.png has been created
+Info in <TCanvas::Print>: file plots/LeptonicTopPt.png has been created
+Info in <TCanvas::Print>: file plots/LeptonicTopEta.png has been created
+Info in <TCanvas::Print>: file plots/LeptonicTopEnergy.png has been created
+Info in <TCanvas::Print>: file plots/NormalisedHadronicTopPt.png has been created
+Info in <TCanvas::Print>: file plots/NormalisedHadronicTopEta.png has been created
+Info in <TCanvas::Print>: file plots/NormalisedHadronicTopEnergy.png has been created
+Info in <TCanvas::Print>: file plots/NormalisedLeptonicTopPt.png has been created
+Info in <TCanvas::Print>: file plots/NormalisedLeptonicTopEta.png has been created
+Info in <TCanvas::Print>: file plots/NormalisedLeptonicTopEnergy.png has been created
+[?1034h

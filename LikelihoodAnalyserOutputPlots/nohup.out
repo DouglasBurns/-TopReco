@@ -1,0 +1,8 @@
+Info in <TCanvas::Print>: file plots/AllJetCSV.png has been created
+Info in <TCanvas::Print>: file plots/Correct_HadB_MTvsMW.png has been created
+Info in <TCanvas::Print>: file plots/Incorrect_HadB_MTvsMW.png has been created
+Info in <TCanvas::Print>: file plots/Correct_HadB_Incorrect_LepB_TrueHadMTvsMW.png has been created
+[?1034hTraceback (most recent call last):
+  File "RunLikelihoodAnalysis.py", line 217, in <module>
+    projTrueMw = TH1D(TrueHadFalseLepMTvsMWHist.ProjectionX())
+NameError: name 'TH1D' is not defined
