@@ -8,7 +8,7 @@ Plots CSV, MW.vs.MT, Neutrino Chi Test.
 '''
 
 import ROOT 
-from ROOT import gROOT, gPad, gStyle, TChain, TFile, TTree, TMath, TH1, TH1F, TH2F, TCanvas, TPad, TAxis, TLegend, TLatex, kRed, kBlue, kGreen
+from ROOT import gROOT, gPad, gStyle, TChain, TFile, TTree, TMath, TH1, TH1F, TH2F, TCanvas, TPad, TAxis, TLegend, TLatex, kRed, kBlue, kGreen, kMagenta
 import math
 
 if __name__ == '__main__':
@@ -18,26 +18,42 @@ if __name__ == '__main__':
 	gStyle.SetOptStat("")
 	input_file = "../../data/tree_TTJet_5000pb_PFElectron_PFMuon_PF2PATJets_MET.root"
 
-	TrueMassDiscrimHist = TH1F("TrueMassDiscrim","True Mass Discrim", 100, -4, 2)
-	TrueCSVDiscrimHist = TH1F("TrueCSVDiscrim","True CSV Discrim", 100, -10, 0)
-	TrueNuChi2DiscrimHist = TH1F("TrueNuChi2Discrim","True NuChi2 Discrim", 100, -0.5, 2)
-	TrueAllDiscrimHist = TH1F("TrueAllDiscrim","True All Discrim", 100, -15, 0)
-		
-	FalseMassDiscrimHist = TH1F("FalseMassDiscrim","False Mass Discrim", 100, -4, 2)
-	FalseCSVDiscrimHist = TH1F("FalseCSVDiscrim","False CSV Discrim", 100, -10, 0)
-	FalseNuChi2DiscrimHist = TH1F("FalseNuChi2Discrim","False NuChi2 Discrim", 100, -0.5, 2)
-	FalseAllDiscrimHist = TH1F("FalseAllDiscrim","False All Discrim", 100, -15, 0)
+	MassDiscrimHist_Correct = TH1F("MassDiscrimHist_Correct","MassDiscrimHist_Correct", 100, -4, 2)
+	MassDiscrimHist_Incorrect = TH1F("MassDiscrimHist_Incorrect","MassDiscrimHist_Incorrect", 100, -4, 2)
+	MassDiscrimHist_NotSemiLeptonic = TH1F("MassDiscrimHist_NotSemiLeptonic","MassDiscrimHist_NotSemiLeptonic", 100, -4, 2)
+	MassDiscrimHist_NotReconstructible = TH1F("MassDiscrimHist_NotReconstructible","MassDiscrimHist_NotReconstructible", 100, -4, 2)
+	MassDiscrimHist_Total = TH1F("MassDiscrimHist_Total","MassDiscrimHist_Total", 100, -4, 2)
 
-	TotalMassDiscrimHist = TH1F("TotalMassDiscrim","Total Mass Discrim", 100, -4, 2)
-	TotalCSVDiscrimHist = TH1F("TotalCSVDiscrim","Total CSV Discrim", 100, -10, 0)
-	TotalNuChi2DiscrimHist = TH1F("TotalNuChi2Discrim","Total NuChi2 Discrim", 100, -0.5, 2)
-	TotalAllDiscrimHist = TH1F("TotalAllDiscrim","Total All Discrim", 100, -15, 0)
+	CSVDiscrimHist_Correct = TH1F("CSVDiscrimHist_Correct","CSVDiscrimHist_Correct", 100, -10, 0)
+	CSVDiscrimHist_Incorrect = TH1F("CSVDiscrimHist_Incorrect","CSVDiscrimHist_Incorrect", 100, -10, 0)
+	CSVDiscrimHist_NotSemiLeptonic = TH1F("CSVDiscrimHist_NotSemiLeptonic","CSVDiscrimHist_NotSemiLeptonic", 100, -10, 0)
+	CSVDiscrimHist_NotReconstructible = TH1F("CSVDiscrimHist_NotReconstructible","CSVDiscrimHist_NotReconstructible", 100, -10, 0)
+	CSVDiscrimHist_Total = TH1F("CSVDiscrimHist_Total","CSVDiscrimHist_Total", 100, -10, 0)
+
+	NuChi2DiscrimHist_Correct = TH1F("NuChi2DiscrimHist_Correct","NuChi2DiscrimHist_Correct", 100, -0.5, 2)
+	NuChi2DiscrimHist_Incorrect = TH1F("NuChi2DiscrimHist_Incorrect","NuChi2DiscrimHist_Incorrect", 100, -0.5, 2)
+	NuChi2DiscrimHist_NotSemiLeptonic = TH1F("NuChi2DiscrimHist_NotSemiLeptonic","NuChi2DiscrimHist_NotSemiLeptonic", 100, -0.5, 2)
+	NuChi2DiscrimHist_NotReconstructible = TH1F("NuChi2DiscrimHist_NotReconstructible","NuChi2DiscrimHist_NotReconstructible", 100, -0.5, 2)
+	NuChi2DiscrimHist_Total = TH1F("NuChi2DiscrimHist_Total","NuChi2DiscrimHist_Total", 100, -0.5, 2)
+
+	AllDiscrimHist_Correct = TH1F("AllDiscrimHist_Correct","AllDiscrimHist_Correct", 100, -15, 0)
+	AllDiscrimHist_Incorrect = TH1F("AllDiscrimHist_Incorrect","AllDiscrimHist_Incorrect", 100, -15, 0)
+	AllDiscrimHist_NotSemiLeptonic = TH1F("AllDiscrimHist_NotSemiLeptonic","AllDiscrimHist_NotSemiLeptonic", 100, -15, 0)
+	AllDiscrimHist_NotReconstructible = TH1F("AllDiscrimHist_NotReconstructible","AllDiscrimHist_NotReconstructible", 100, -15, 0)
+	AllDiscrimHist_Total = TH1F("AllDiscrimHist_Total","AllDiscrimHist_Total", 100, -15, 0)
+
 
 
 	# inputTree = TTree(input_file.get("Discriminator"))
 	inputTree = "TTbar_plus_X_analysis/EPlusJets/Ref selection/LikelihoodReco/Discriminator"
+	inputTreeSolution = "TTbar_plus_X_analysis/EPlusJets/Ref selection/LikelihoodReco/TopReco"
+
 	Chain = TChain(inputTree)
 	Chain.Add(input_file)
+	ChainSolution = TChain(inputTreeSolution)
+	ChainSolution.Add(input_file)
+
+	Chain.AddFriend(ChainSolution)
 
 	Chain.SetBranchStatus("*",1)
 
@@ -50,52 +66,87 @@ if __name__ == '__main__':
 		CSVDiscrim = event.__getattr__("CSVDiscrimBest")
 		NuChi2Discrim = event.__getattr__("NuChi2DiscrimBest")
 		AllDiscrim = event.__getattr__("likelihoodRatioDiscrimBest")
-		TrueEventReconstruction = event.__getattr__("EventReconstruction")
+		# TrueEventReconstruction = event.__getattr__("EventReconstruction")
+		TypeofSolution = event.__getattr__("TypeofSolution")
 
-		TotalMassDiscrimHist.Fill(MassDiscrim)
-		TotalCSVDiscrimHist.Fill(CSVDiscrim)
-		TotalNuChi2DiscrimHist.Fill(NuChi2Discrim)
-		TotalAllDiscrimHist.Fill(AllDiscrim)
+		MassDiscrimHist_Total.Fill(MassDiscrim)
+		CSVDiscrimHist_Total.Fill(CSVDiscrim)
+		NuChi2DiscrimHist_Total.Fill(NuChi2Discrim)
+		AllDiscrimHist_Total.Fill(AllDiscrim)
 
-		if (TrueEventReconstruction == 0):
-			FalseMassDiscrimHist.Fill(MassDiscrim)
-			FalseCSVDiscrimHist.Fill(CSVDiscrim)
-			FalseNuChi2DiscrimHist.Fill(NuChi2Discrim)
-			FalseAllDiscrimHist.Fill(AllDiscrim)
+		if (TypeofSolution == 1):#Correct = 1
+			MassDiscrimHist_Correct.Fill(MassDiscrim)
+			CSVDiscrimHist_Correct.Fill(CSVDiscrim)
+			NuChi2DiscrimHist_Correct.Fill(NuChi2Discrim)
+			AllDiscrimHist_Correct.Fill(AllDiscrim)
 
-		if (TrueEventReconstruction == 1):
-			TrueMassDiscrimHist.Fill(MassDiscrim)
-			TrueCSVDiscrimHist.Fill(CSVDiscrim)
-			TrueNuChi2DiscrimHist.Fill(NuChi2Discrim)
-			TrueAllDiscrimHist.Fill(AllDiscrim)
+		if (TypeofSolution == 2):#Reconstruction Chose Wrong Combination = 2
+			MassDiscrimHist_Incorrect.Fill(MassDiscrim)
+			CSVDiscrimHist_Incorrect.Fill(CSVDiscrim)
+			NuChi2DiscrimHist_Incorrect.Fill(NuChi2Discrim)
+			AllDiscrimHist_Incorrect.Fill(AllDiscrim)
+
+		if (TypeofSolution == 3):#Event does not have all partons present = 3
+			MassDiscrimHist_NotSemiLeptonic.Fill(MassDiscrim)
+			CSVDiscrimHist_NotSemiLeptonic.Fill(CSVDiscrim)
+			NuChi2DiscrimHist_NotSemiLeptonic.Fill(NuChi2Discrim)
+			AllDiscrimHist_NotSemiLeptonic.Fill(AllDiscrim)
+
+		if (TypeofSolution == 4):#Event is not semiLeptonic = 4
+			MassDiscrimHist_NotReconstructible.Fill(MassDiscrim)
+			CSVDiscrimHist_NotReconstructible.Fill(CSVDiscrim)
+			NuChi2DiscrimHist_NotReconstructible.Fill(NuChi2Discrim)
+			AllDiscrimHist_NotReconstructible.Fill(AllDiscrim)
+
+
+
+
 	########## 			NORMALISING 			##########
 
-	# integral = TrueMassDiscrimHist.Integral()
-	# TrueMassDiscrimHist.Scale(1/integral)
-	# integral = TrueCSVDiscrimHist.Integral()
-	# TrueCSVDiscrimHist.Scale(1/integral)
-	# integral = TrueNuChi2DiscrimHist.Integral()
-	# TrueNuChi2DiscrimHist.Scale(1/integral)
-	# integral = TrueAllDiscrimHist.Integral()
-	# TrueAllDiscrimHist.Scale(1/integral)
+	# integral = MassDiscrimHist_Total.Integral()
+	# MassDiscrimHist_Total.Scale(1/integral)
+	# integral = CSVDiscrimHist_Total.Integral()
+	# CSVDiscrimHist_Total_Total.Scale(1/integral)
+	# integral = NuChi2DiscrimHist_Total.Integral()
+	# NuChi2DiscrimHist_Total.Scale(1/integral)
+	# integral = AllDiscrimHist_Total.Integral()
+	# AllDiscrimHist_Total.Scale(1/integral)
 
-	# integral = FalseMassDiscrimHist.Integral()
-	# FalseMassDiscrimHist.Scale(1/integral)
-	# integral = FalseCSVDiscrimHist.Integral()
-	# FalseCSVDiscrimHist.Scale(1/integral)
-	# integral = FalseNuChi2DiscrimHist.Integral()
-	# FalseNuChi2DiscrimHist.Scale(1/integral)
-	# integral = FalseAllDiscrimHist.Integral()
-	# FalseAllDiscrimHist.Scale(1/integral)
+	# integral = MassDiscrimHist_Correct.Integral()
+	# MassDiscrimHist_Correct.Scale(1/integral)
+	# integral = CSVDiscrimHist_Correct.Integral()
+	# CSVDiscrimHist_Correct.Scale(1/integral)
+	# integral = NuChi2DiscrimHist_Correct.Integral()
+	# NuChi2DiscrimHist_Correct.Scale(1/integral)
+	# integral = AllDiscrimHist_Correct.Integral()
+	# AllDiscrimHist_Correct.Scale(1/integral)
 
-	# integral = TotalMassDiscrimHist.Integral()
-	# TotalMassDiscrimHist.Scale(1/integral)
-	# integral = TotalCSVDiscrimHist.Integral()
-	# TotalCSVDiscrimHist.Scale(1/integral)
-	# integral = TotalNuChi2DiscrimHist.Integral()
-	# TotalNuChi2DiscrimHist.Scale(1/integral)
-	# integral = TotalAllDiscrimHist.Integral()
-	# TotalAllDiscrimHist.Scale(1/integral)
+	# integral = MassDiscrimHist_Incorrect.Integral()
+	# MassDiscrimHist_Incorrect.Scale(1/integral)
+	# integral = CSVDiscrimHist_Incorrect.Integral()
+	# CSVDiscrimHist_Incorrect.Scale(1/integral)
+	# integral = NuChi2DiscrimHist_Incorrect.Integral()
+	# NuChi2DiscrimHist_Incorrect.Scale(1/integral)
+	# integral = AllDiscrimHist_Incorrect.Integral()
+	# AllDiscrimHist_Incorrect.Scale(1/integral)
+
+	# integral = MassDiscrimHist_NotSemiLeptonic.Integral()
+	# MassDiscrimHist_NotSemiLeptonic.Scale(1/integral)
+	# integral = CSVDiscrimHist_NotSemiLeptonic.Integral()
+	# CSVDiscrimHist_NotSemiLeptonic.Scale(1/integral)
+	# integral = NuChi2DiscrimHist_NotSemiLeptonic.Integral()
+	# NuChi2DiscrimHist_NotSemiLeptonic.Scale(1/integral)
+	# integral = AllDiscrimHis_NotSemiLeptonic.Integral()
+	# AllDiscrimHist_NotSemiLeptonic.Scale(1/integral)
+
+	# integral = MassDiscrimHist_NotReconstructible.Integral()
+	# MassDiscrimHist_NotReconstructible.Scale(1/integral)
+	# integral = CSVDiscrimHist_NotReconstructible.Integral()
+	# CSVDiscrimHist_NotReconstructible.Scale(1/integral)
+	# integral = NuChi2DiscrimHist_NotReconstructible.Integral()
+	# NuChi2DiscrimHist_NotReconstructible.Scale(1/integral)
+	# integral = AllDiscrimHist_NotReconstructible.Integral()
+	# AllDiscrimHist_NotReconstructible.Scale(1/integral)
 
 
 	########## 				PLOTTING 			##########
@@ -110,24 +161,31 @@ if __name__ == '__main__':
 	Massleg.SetFillColor(0)
 	Massleg.SetLineColor(0)
 
-	TotalMassDiscrimHist.SetTitle("Mass Discriminator; Mass Disc; Events")
-	TotalMassDiscrimHist.GetYaxis().SetTitleOffset(1.2)
-	Massleg.AddEntry(TotalMassDiscrimHist, "Total Events" ,"le")
-	TotalMassDiscrimHist.Draw()
+	MassDiscrimHist_NotSemiLeptonic.SetLineColor(kMagenta)
+	MassDiscrimHist_NotReconstructible.SetLineColor(kGreen)
+	MassDiscrimHist_Incorrect.SetLineColor(kRed)
+	MassDiscrimHist_Correct.SetLineColor(kBlue)
 
-	TrueMassDiscrimHist.SetLineColor(kBlue)
-	Massleg.AddEntry(TrueMassDiscrimHist, "Correct Reconstruction" ,"le")
-	TrueMassDiscrimHist.Draw("same")
+	MassDiscrimHist_Total.SetTitle("Mass Discriminator; Mass Disc; Events")
+	MassDiscrimHist_Total.GetYaxis().SetTitleOffset(1.2)
 
-	FalseMassDiscrimHist.SetLineColor(kRed)
-	Massleg.AddEntry(FalseMassDiscrimHist, "Incorrect Reconstruction" ,"le")
-	FalseMassDiscrimHist.Draw("same")
+	MassDiscrimHist_Total.Draw("")
+	MassDiscrimHist_Incorrect.Draw("same")
+	MassDiscrimHist_NotReconstructible.Draw("same")
+	MassDiscrimHist_NotSemiLeptonic.Draw("same")
+	MassDiscrimHist_Correct.Draw("same")
+
+	Massleg.AddEntry(MassDiscrimHist_Total, "TTBar Total" ,"le")
+	Massleg.AddEntry(MassDiscrimHist_NotSemiLeptonic, "TTbar Not SemiLeptonic" ,"le")
+	Massleg.AddEntry(MassDiscrimHist_NotReconstructible, "TTbar Not Reconstructible" ,"le")
+	Massleg.AddEntry(MassDiscrimHist_Incorrect, "TTbar Wrong Reco" ,"le")
+	Massleg.AddEntry(MassDiscrimHist_Correct, "TTbar Right Reco" ,"le")
+
 
 	Massleg.Draw()
 	MassCanvas.Update()
 	MassCanvas.SaveAs("plots/TotalMassDiscrimBest.png")
 	MassCanvas.Write()
-
 
 	########## 				CSV 				##########
 
@@ -136,50 +194,67 @@ if __name__ == '__main__':
 	CSVleg.SetFillColor(0)
 	CSVleg.SetLineColor(0)
 
-	TotalCSVDiscrimHist.SetTitle("CSV Discriminator; CSV Disc; Events")
-	TotalCSVDiscrimHist.GetYaxis().SetTitleOffset(1.2)
-	CSVleg.AddEntry(TotalCSVDiscrimHist, "Total Events" ,"le")
-	TotalCSVDiscrimHist.Draw()
+	CSVDiscrimHist_NotSemiLeptonic.SetLineColor(kMagenta)
+	CSVDiscrimHist_NotReconstructible.SetLineColor(kGreen)
+	CSVDiscrimHist_Incorrect.SetLineColor(kRed)
+	CSVDiscrimHist_Correct.SetLineColor(kBlue)
 
-	TrueCSVDiscrimHist.SetLineColor(kBlue)
-	CSVleg.AddEntry(TrueCSVDiscrimHist, "Correct Reconstruction" ,"le")
-	TrueCSVDiscrimHist.Draw("same")
+	CSVDiscrimHist_Total.SetTitle("Mass Discriminator; Mass Disc; Events")
+	CSVDiscrimHist_Total.GetYaxis().SetTitleOffset(1.2)
 
-	FalseCSVDiscrimHist.SetLineColor(kRed)
-	CSVleg.AddEntry(FalseCSVDiscrimHist, "Incorrect Reconstruction" ,"le")
-	FalseCSVDiscrimHist.Draw("same")
+	CSVDiscrimHist_Total.Draw("")
+	CSVDiscrimHist_Incorrect.Draw("same")
+	CSVDiscrimHist_NotReconstructible.Draw("same")
+	CSVDiscrimHist_NotSemiLeptonic.Draw("same")
+	CSVDiscrimHist_Correct.Draw("same")
+
+	CSVleg.AddEntry(CSVDiscrimHist_Total, "TTBar Total" ,"le")
+	CSVleg.AddEntry(CSVDiscrimHist_NotSemiLeptonic, "TTbar Not SemiLeptonic" ,"le")
+	CSVleg.AddEntry(CSVDiscrimHist_NotReconstructible, "TTbar Not Reconstructible" ,"le")
+	CSVleg.AddEntry(CSVDiscrimHist_Incorrect, "TTbar Wrong Reco" ,"le")
+	CSVleg.AddEntry(CSVDiscrimHist_Correct, "TTbar Right Reco" ,"le")
+
 
 	CSVleg.Draw()
 	CSVCanvas.Update()
 	CSVCanvas.SaveAs("plots/TotalCSVDiscrimBest.png")
-	CSVCanvas.Write()	
+	CSVCanvas.Write()
 
 
 	########## 				NuChi2				##########
+
+	########## 				CSV 				##########
 
 	NuChi2Canvas = TCanvas("NuChi2","NuChi2", 0, 0, 800, 600)
 	NuChi2leg = TLegend(0.6,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NuChi2leg.SetFillColor(0)
 	NuChi2leg.SetLineColor(0)
 
-	TotalNuChi2DiscrimHist.SetTitle("NuChi2 Discriminator; NuChi2 Disc; Events")
-	TotalNuChi2DiscrimHist.GetYaxis().SetTitleOffset(1.2)
-	NuChi2leg.AddEntry(TotalNuChi2DiscrimHist, "Total Events" ,"le")
-	TotalNuChi2DiscrimHist.Draw()
+	NuChi2DiscrimHist_NotSemiLeptonic.SetLineColor(kMagenta)
+	NuChi2DiscrimHist_NotReconstructible.SetLineColor(kGreen)
+	NuChi2DiscrimHist_Incorrect.SetLineColor(kRed)
+	NuChi2DiscrimHist_Correct.SetLineColor(kBlue)
 
-	TrueNuChi2DiscrimHist.SetLineColor(kBlue)
-	NuChi2leg.AddEntry(TrueNuChi2DiscrimHist, "Correct Reconstruction" ,"le")
-	TrueNuChi2DiscrimHist.Draw("same")
+	NuChi2DiscrimHist_Total.SetTitle("Mass Discriminator; Mass Disc; Events")
+	NuChi2DiscrimHist_Total.GetYaxis().SetTitleOffset(1.2)
 
-	FalseNuChi2DiscrimHist.SetLineColor(kRed)
-	NuChi2leg.AddEntry(FalseNuChi2DiscrimHist, "Incorrect Reconstruction" ,"le")
-	FalseNuChi2DiscrimHist.Draw("same")
+	NuChi2DiscrimHist_Total.Draw("")
+	NuChi2DiscrimHist_Incorrect.Draw("same")
+	NuChi2DiscrimHist_NotReconstructible.Draw("same")
+	NuChi2DiscrimHist_NotSemiLeptonic.Draw("same")
+	NuChi2DiscrimHist_Correct.Draw("same")
+
+	NuChi2leg.AddEntry(NuChi2DiscrimHist_Total, "TTBar Total" ,"le")
+	NuChi2leg.AddEntry(NuChi2DiscrimHist_NotSemiLeptonic, "TTbar Not SemiLeptonic" ,"le")
+	NuChi2leg.AddEntry(NuChi2DiscrimHist_NotReconstructible, "TTbar Not Reconstructible" ,"le")
+	NuChi2leg.AddEntry(NuChi2DiscrimHist_Incorrect, "TTbar Wrong Reco" ,"le")
+	NuChi2leg.AddEntry(NuChi2DiscrimHist_Correct, "TTbar Right Reco" ,"le")
+
 
 	NuChi2leg.Draw()
 	NuChi2Canvas.Update()
 	NuChi2Canvas.SaveAs("plots/TotalNuChi2DiscrimBest.png")
 	NuChi2Canvas.Write()
-
 
 	########## 				All 				##########
 
@@ -188,36 +263,56 @@ if __name__ == '__main__':
 	Allleg.SetFillColor(0)
 	Allleg.SetLineColor(0)
 
-	TotalAllDiscrimHist.SetTitle("All Discriminator; All Disc; Events")
-	TotalAllDiscrimHist.GetYaxis().SetTitleOffset(1.2)
-	Allleg.AddEntry(TotalAllDiscrimHist, "Total Events" ,"le")
-	TotalAllDiscrimHist.Draw()
+	AllDiscrimHist_NotSemiLeptonic.SetLineColor(kMagenta)
+	AllDiscrimHist_NotReconstructible.SetLineColor(kGreen)
+	AllDiscrimHist_Incorrect.SetLineColor(kRed)
+	AllDiscrimHist_Correct.SetLineColor(kBlue)
 
-	TrueAllDiscrimHist.SetLineColor(kBlue)
-	Allleg.AddEntry(TrueAllDiscrimHist, "Correct Reconstruction" ,"le")
-	TrueAllDiscrimHist.Draw("same")
+	AllDiscrimHist_Total.SetTitle("Mass Discriminator; Mass Disc; Events")
+	AllDiscrimHist_Total.GetYaxis().SetTitleOffset(1.2)
 
-	FalseAllDiscrimHist.SetLineColor(kRed)
-	Allleg.AddEntry(FalseAllDiscrimHist, "Incorrect Reconstruction" ,"le")
-	FalseAllDiscrimHist.Draw("same")
+	AllDiscrimHist_Total.Draw("")
+	AllDiscrimHist_Incorrect.Draw("same")
+	AllDiscrimHist_NotReconstructible.Draw("same")
+	AllDiscrimHist_NotSemiLeptonic.Draw("same")
+	AllDiscrimHist_Correct.Draw("same")
+
+	Allleg.AddEntry(AllDiscrimHist_Total, "TTBar Total" ,"le")
+	Allleg.AddEntry(AllDiscrimHist_NotSemiLeptonic, "TTbar Not SemiLeptonic" ,"le")
+	Allleg.AddEntry(AllDiscrimHist_NotReconstructible, "TTbar Not Reconstructible" ,"le")
+	Allleg.AddEntry(AllDiscrimHist_Incorrect, "TTbar Wrong Reco" ,"le")
+	Allleg.AddEntry(AllDiscrimHist_Correct, "TTbar Right Reco" ,"le")
+
 
 	Allleg.Draw()
 	AllCanvas.Update()
 	AllCanvas.SaveAs("plots/TotalAllDiscrimBest.png")
 	AllCanvas.Write()
 
+	########## 				Write Histos 				##########
 
-	TrueMassDiscrimHist.Write()
-	TrueCSVDiscrimHist.Write()
-	TrueNuChi2DiscrimHist.Write()
-	TrueAllDiscrimHist.Write()
+	MassDiscrimHist_Total.Write()
+	CSVDiscrimHist_Total.Write()
+	NuChi2DiscrimHist_Total.Write()
+	AllDiscrimHist_Total.Write()
 
-	FalseMassDiscrimHist.Write()
-	FalseCSVDiscrimHist.Write()
-	FalseNuChi2DiscrimHist.Write()
-	FalseAllDiscrimHist.Write()
+	MassDiscrimHist_Correct.Write()
+	CSVDiscrimHist_Correct.Write()
+	NuChi2DiscrimHist_Correct.Write()
+	AllDiscrimHist_Correct.Write()
 
-	TotalMassDiscrimHist.Write()
-	TotalCSVDiscrimHist.Write()
-	TotalNuChi2DiscrimHist.Write()
-	TotalAllDiscrimHist.Write()
+	MassDiscrimHist_Incorrect.Write()
+	CSVDiscrimHist_Incorrect.Write()
+	NuChi2DiscrimHist_Incorrect.Write()
+	AllDiscrimHist_Incorrect.Write()
+
+	MassDiscrimHist_NotSemiLeptonic.Write()
+	CSVDiscrimHist_NotSemiLeptonic.Write()
+	NuChi2DiscrimHist_NotSemiLeptonic.Write()
+	AllDiscrimHist_NotSemiLeptonic.Write()
+
+	MassDiscrimHist_NotReconstructible.Write()
+	CSVDiscrimHist_NotReconstructible.Write()
+	NuChi2DiscrimHist_NotReconstructible.Write()
+	AllDiscrimHist_NotReconstructible.Write()
+
