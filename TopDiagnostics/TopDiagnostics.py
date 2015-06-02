@@ -510,7 +510,7 @@ if __name__ == '__main__':
 	########## 			Hadronic Top Pt 			##########
 
 	NormalisedDiff_TopPtCanvas = TCanvas("NormalisedDiff_TopPt","NormalisedDiff_TopPt", 0, 0, 800, 600)
-	NormalisedDiff_TopPtleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_TopPtleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_TopPtleg.SetFillColor(0)
 	NormalisedDiff_TopPtleg.SetLineColor(0)
 
@@ -540,7 +540,7 @@ if __name__ == '__main__':
 	########## 			Hadronic Top Eta 			##########
 
 	NormalisedDiff_TopEtaCanvas = TCanvas("NormalisedDiff_TopEta","NormalisedDiff_TopEta", 0, 0, 800, 600)
-	NormalisedDiff_TopEtaleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_TopEtaleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_TopEtaleg.SetFillColor(0)
 	NormalisedDiff_TopEtaleg.SetLineColor(0)
 
@@ -570,7 +570,7 @@ if __name__ == '__main__':
 	########## 			Hadronic Top Energy 			##########
 
 	NormalisedDiff_TopEnergyCanvas = TCanvas("NormalisedDiff_TopEnergy","NormalisedDiff_TopEnergy", 0, 0, 800, 600)
-	NormalisedDiff_TopEnergyleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_TopEnergyleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_TopEnergyleg.SetFillColor(0)
 	NormalisedDiff_TopEnergyleg.SetLineColor(0)
 
@@ -600,7 +600,7 @@ if __name__ == '__main__':
 	########## 			Hadronic Top Mass 			##########
 
 	NormalisedDiff_TopMassCanvas = TCanvas("NormalisedDiff_TopMass","NormalisedDiff_TopMass", 0, 0, 800, 600)
-	NormalisedDiff_TopMassleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_TopMassleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_TopMassleg.SetFillColor(0)
 	NormalisedDiff_TopMassleg.SetLineColor(0)
 
@@ -630,7 +630,7 @@ if __name__ == '__main__':
 	########## 			Hadronic W Pt 			##########
 
 	NormalisedDiff_WPtCanvas = TCanvas("NormalisedDiff_WPt","NormalisedDiff_WPt", 0, 0, 800, 600)
-	NormalisedDiff_WPtleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_WPtleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_WPtleg.SetFillColor(0)
 	NormalisedDiff_WPtleg.SetLineColor(0)
 
@@ -660,7 +660,7 @@ if __name__ == '__main__':
 	########## 			Hadronic W Eta 			##########
 
 	NormalisedDiff_WEtaCanvas = TCanvas("NormalisedDiff_WEta","NormalisedDiff_WEta", 0, 0, 800, 600)
-	NormalisedDiff_WEtaleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_WEtaleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_WEtaleg.SetFillColor(0)
 	NormalisedDiff_WEtaleg.SetLineColor(0)
 
@@ -690,7 +690,7 @@ if __name__ == '__main__':
 	########## 			Hadronic W Energy 			##########
 
 	NormalisedDiff_WEnergyCanvas = TCanvas("NormalisedDiff_WEnergy","NormalisedDiff_WEnergy", 0, 0, 800, 600)
-	NormalisedDiff_WEnergyleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_WEnergyleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_WEnergyleg.SetFillColor(0)
 	NormalisedDiff_WEnergyleg.SetLineColor(0)
 
@@ -720,7 +720,7 @@ if __name__ == '__main__':
 	########## 			Hadronic W Mass 			##########
 
 	NormalisedDiff_WMassCanvas = TCanvas("NormalisedDiff_WMass","NormalisedDiff_WMass", 0, 0, 800, 600)
-	NormalisedDiff_WMassleg = TLegend(0.5,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
+	NormalisedDiff_WMassleg = TLegend(0.7,0.7,0.88,0.88)#xmin,ymin,xmax,ymax (in % of canvas)
 	NormalisedDiff_WMassleg.SetFillColor(0)
 	NormalisedDiff_WMassleg.SetLineColor(0)
 

@@ -30,11 +30,11 @@ if __name__ == '__main__':
 	CSVDiscrimHist_NotReconstructible = TH1F("CSVDiscrimHist_NotReconstructible","CSVDiscrimHist_NotReconstructible", 100, -10, 0)
 	CSVDiscrimHist_Total = TH1F("CSVDiscrimHist_Total","CSVDiscrimHist_Total", 100, -10, 0)
 
-	NuChi2DiscrimHist_Correct = TH1F("NuChi2DiscrimHist_Correct","NuChi2DiscrimHist_Correct", 100, -0.5, 2)
-	NuChi2DiscrimHist_Incorrect = TH1F("NuChi2DiscrimHist_Incorrect","NuChi2DiscrimHist_Incorrect", 100, -0.5, 2)
-	NuChi2DiscrimHist_NotSemiLeptonic = TH1F("NuChi2DiscrimHist_NotSemiLeptonic","NuChi2DiscrimHist_NotSemiLeptonic", 100, -0.5, 2)
-	NuChi2DiscrimHist_NotReconstructible = TH1F("NuChi2DiscrimHist_NotReconstructible","NuChi2DiscrimHist_NotReconstructible", 100, -0.5, 2)
-	NuChi2DiscrimHist_Total = TH1F("NuChi2DiscrimHist_Total","NuChi2DiscrimHist_Total", 100, -0.5, 2)
+	NuChi2DiscrimHist_Correct = TH1F("NuChi2DiscrimHist_Correct","NuChi2DiscrimHist_Correct", 100, -0.5, 0.8)
+	NuChi2DiscrimHist_Incorrect = TH1F("NuChi2DiscrimHist_Incorrect","NuChi2DiscrimHist_Incorrect", 100, -0.5, 0.8)
+	NuChi2DiscrimHist_NotSemiLeptonic = TH1F("NuChi2DiscrimHist_NotSemiLeptonic","NuChi2DiscrimHist_NotSemiLeptonic", 100, -0.5, 0.8)
+	NuChi2DiscrimHist_NotReconstructible = TH1F("NuChi2DiscrimHist_NotReconstructible","NuChi2DiscrimHist_NotReconstructible", 100, -0.5, 0.8)
+	NuChi2DiscrimHist_Total = TH1F("NuChi2DiscrimHist_Total","NuChi2DiscrimHist_Total", 100, -0.5, 0.8)
 
 	AllDiscrimHist_Correct = TH1F("AllDiscrimHist_Correct","AllDiscrimHist_Correct", 100, -15, 0)
 	AllDiscrimHist_Incorrect = TH1F("AllDiscrimHist_Incorrect","AllDiscrimHist_Incorrect", 100, -15, 0)
